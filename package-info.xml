@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!DOCTYPE package-info SYSTEM "http://www.simplemachines.org/xml/package-info">
+<package-info xmlns="http://www.simplemachines.org/xml/package-info" xmlns:smf="http://www.simplemachines.org/">
+	<name>Loading Screen</name>
+	<id>LiamHammett:LoadingScreen</id>
+	<type>modification</type>
+	<version>1.0</version>
+    <install for="2.0 - 2.0.99">
+	    <readme type="file" parsebbc="true">readme.txt</readme>
+		<modification>smf-2.x.xml</modification>
+		<require-file name="loading.gif" destination="$imagesdir" />
+	</install>
+	<uninstall for="2.0 - 2.0.99">
+		<modification reverse="true">smf-2.x.xml</modification>
+		<remove-file name="$imagesdir/loading.gif" />
+	</uninstall>
+</package-info>

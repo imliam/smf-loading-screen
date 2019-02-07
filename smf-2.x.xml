@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<!DOCTYPE modification SYSTEM "http://www.simplemachines.org/xml/modification">
+<modification xmlns="http://www.simplemachines.org/xml/modification" xmlns:smf="http://www.simplemachines.org/">
+	<name>Loading Screen</name>
+	<id>LiamHammett:LoadingScreen</id>
+	<version>1.0</version>
+	<homepage>https://liamhammett.com/</homepage>
+	<file name="$languagedir/Modifications.english.php">
+		<operation>
+			<search position="end" />
+			<add><![CDATA[$txt['loading'] = 'Loading...';
+]]></add>
+		</operation>
+</file>
+<file name="$themedir/index.template.php">
+	<operation>
+		<search position="replace"><![CDATA[function template_body_above()
+{
+	global $context, $settings, $options, $scripturl, $txt, $modSettings;]]></search>
+		<add><![CDATA[function template_body_above()
+{
+   global $context, $settings, $options, $scripturl, $txt, $modSettings;
+
+   echo'
+   <div id="loading" class="loadingscreen">
+  <p><img src="', $settings['images_url'], '/loading.gif" alt="', $txt['loading'], '" /><br /></p>
+</div>
+<script type="text/javascript">
+  document.getElementById("loading").className = "loadingscreen";
+  var finishLoading = function(){document.getElementById("loading").className = "loadingscreen_hidden";};
+  var oldLoad = window.onload;
+  var newLoad = oldLoad ? function(){finishLoading.call(this);oldLoad.call(this);} : finishLoading;
+  window.onload = newLoad;
+</script>';
+]]></add>
+	</operation>
+</file>
+<file name="$themedir/style.css">
+	<operation>
+		<search position="after"><![CDATA[/* hovered auto suggest item */]]></search>
+		<add><![CDATA[/* Loadingscreen while actually loading :P */
+.loadingscreen
+{
+    display: block;
+    position: absolute;
+    top: 40%;
+    left: 45%;
+   width: 150px;
+    text-align: center;
+   -moz-border-radius: 20px;
+   -webkit-border-radius: 20px;
+   border: 1px dashed #cccccc;
+   padding: 20px;
+    background: #fff;
+    _background: none; /*this line removes the background in IE*/
+    opacity: .75;
+}
+/* Loadingscreen while invisible */
+.loadingscreen_hidden
+{
+    display:none;
+}
+]]></add>
+	</operation>
+</file>
+</modification>
